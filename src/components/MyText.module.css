@@ -20,6 +20,14 @@
   margin-bottom: 2rem;
 }
 
-.text {
-  font-size: 2rem;
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+  
+  .text {
+    font-size: 2rem;
+  }
 }
+
+
