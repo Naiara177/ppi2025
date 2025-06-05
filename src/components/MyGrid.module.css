@@ -1,10 +1,9 @@
 .grid {
-
+    /* Estilos para a grade podem ser adicionados aqui */
 }
 
 .card {
-
     height: 30rem;
-    background-color:(--medium-slate-blue);
-    color: 
+    background-color: var(--medium-slate-blue); /* Usando variável CSS corretamente */
+    color: white; /* Adicionando uma cor válida para o texto */
 }
