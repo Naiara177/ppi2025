@@ -1,26 +1,15 @@
 import "./styles/theme.css";
 import "./styles/global.css";
-import { MyText } from "./components/MyText";
+import { MyTextList } from "./components/MyTextList";
+import { MyGrid } from "./components/MyGrid";
 
 export default function App() {
+
   return (
-    //React Fragments
+    //React Fragment
     <>
-      <MyText title= "1. Lorem  minus consequuntur">
-     <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-      </MyText>
-
-       <MyText title= "2. minus consequuntur accusamus">
-       <p>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt,
-        voluptatem eum ducimus aliquid quod repudiandae? Vel laborum nemo beatae
-        eveniet minus consequuntur accusamus. Inventore praesentium libero quia
-        illo, odio earum? </p>
-        </MyText>
-
-        <MyText title= "3.  Lorem ipsum dolor ">
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-        voluptatem eum ducimus aliquid quod repudiandae?</p>
-        </MyText>
-        </>
+      <MyTextList />
+      <MyGrid />
+    </>
   );
 }
