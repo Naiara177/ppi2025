@@ -1,97 +1,34 @@
-/* Container principal */
 .container {
-  display: grid;
-  grid-template-areas:
-    "header1 header1"
-    "aside header2"
-    "aside main"
-    "footer footer";
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: 10rem 5rem auto 10rem;
+    /*margin: 0;*/
+    max-width: 30rem;
+
+    @media (max-width: 768px) {
+        max-width: 80%;
+        
+    }
 }
 
-/* Responsividade: Menos de 1200px → Esconder aside */
-@media (max-width: 1200px) {
-  .container {
-    grid-template-areas:
-      "header1 header1"
-      "aside header2"
-      "aside main"
-      "footer footer";
-    /* Ajusta as colunas para uma única coluna */           
-    grid-template-columns: 1fr;
-  }
-
-  .aside {
-    display: none;
-  }
+.div {
+    height: 20rem;
+    background-color: var(--primary);
+    box-shadow: 0 0 1rem var(--primary-contrast-dark);
+    /*margin: 3rem 5rem;*/
+    padding: 3rem;
+    border-radius: 2rem;
 }
 
-/* Responsividade: Menos de 768px → Esconder um dos headers, um dos footers e todos os asides */
-@media (max-width: 768px) {
-  .header1 {
-    display: none;
-  }
+.title {
+    font-weight: bolder;
+    font-size: 4rem;
+    color: var(--primary-dark);
+    text-align: center;
+    margin-bottom: 2rem;
 
-  .footer {
-    display: none;
-  }
-
-  .aside {
-    display: none;
-  }
+    @media (max-width: 768px) {
+        font-size: 2rem;
+    }
 }
 
-/* Grid para os cards */
-.grid {
-  padding: 3rem;
-  display: grid;
-  gap: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  grid-template-rows: repeat(auto-fit, min-content);
-}
-
-/* Cards */
-.card {
-  height: 20rem;
-  background-color: var(--periwinkle);
-  color: var(--violet);
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0.5rem 0.5rem 1rem rgba(226, 138, 246, 0.5);
-  font-size: 3rem;
-  text-align: center;
-}
-
-/* Estilos individuais */
-.header1 {
-  grid-area: header1;
-  background-color: darkslateblue;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-}
-
-.header2 {
-  grid-area: header2;
-  background-color: deepskyblue;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-}
-
-.aside {
-  grid-area: aside;
-  background-color: deeppink;
-  color: rgb(227, 209, 1);
-  text-align: center;
-  padding: 1rem;
-}
-
-.footer {
-  grid-area: footer;
-  background-color: darkslateblue;
-  color: rgb(19, 117, 4);
-  text-align: center;
-  padding: 1rem;
+.text {
+    font-size: 2rem;
 }

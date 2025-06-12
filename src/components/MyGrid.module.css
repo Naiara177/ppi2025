@@ -1,98 +1,42 @@
-@media (max-width: 768px) {
-  .main > * {
-    display: none;
-  }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #794da8;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
+
+.header1 h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
 .grid {
-  padding: 3rem;
-  display: grid;
-  gap: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-  grid-template-rows: repeat(auto-fit, min-content);
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 2rem;
 }
 
 .card {
-  height: 20rem;
-  background-color: var(--periwinkle); /* Corrigido erro de sintaxe */
-  color: var(--violet);
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0.5rem 0.5rem 1rem rgba(226, 138, 246, 0.5);
-  font-size: 3rem;
-  text-align: center;
+    background-color: #ab82d7;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
 }
 
-.container {
-  display: grid;
-  grid-template-areas:
-    "header1 header1"
-    "aside header2"
-    "aside main"
-    "footer footer";
-  grid-template-columns: 1fr 3fr;
-  grid-template-rows: 10rem 5rem auto 10rem;
-}
-
-/* Responsividade: Menos de 1200px → Esconder aside */
-@media (max-width: 1200px) {
-  .container {
-    grid-template-areas:
-      "header1 header1"
-      "header2 header2"
-      "main main"
-      "footer footer";
-    grid-template-columns: 1fr;
-  }
-
-  .aside {
-    display: none;
-  }
-}
-
-/* Responsividade: Menos de 768px → Esconder um dos headers, o footer e todos os asides */
-@media (max-width: 768px) {
-  .header1 {
-    display: none;
-  }
-
-  .footer {
-    display: none;
-  }
-
-  .aside {
-    display: none;
-  }
-}
-
-.header1 {
-  grid-area: header1;
-  background-color: rgba(255, 34, 0, 0.766);
-}
-
-.header2 {
-  grid-area: header2;
-  background-color: rgb(15, 205, 235);
-}
-
-.aside {
-  grid-area: aside;
-  background-color: rgb(243, 212, 7);
-}
-
-.main {
-  grid-area: main;
-  background-color: rgb(243, 242, 236);
+.cardImage {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .footer {
-  grid-area: footer;
-  background-color: rgb(18, 90, 6);
-}
-.footer {
-  grid-area: footer;
-  background-color: rgb(240, 251, 238);
-} 
-.footer {
-  grid-area: footer;
-  background-color: rgb(18, 90, 6);
+    margin-top: 20px;
+    font-size: 0.9em;
 }

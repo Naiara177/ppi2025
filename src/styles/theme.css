@@ -1,24 +1,5 @@
 :root {
-    --primary-dark: rgb(242, 218, 243);
-    --primary: rgb(230, 165, 226);
-    --alice-blue: rgb(59, 3, 77);
-    --periwinkle: #c3bef7ff;
-    --medium-slate-blue: #8a4fff;
-
-
-
---lavender: #b57edc;
---amethyst: #9966cc;
---rebecca-purple: #663399;
---purple-heart: #6a0dad;
---electric-violet: #8f00ff;
---mauve: #e0b0ff;
---heliotrope: #df73ff;
---violet: #8f5fd7;
---deep-violet: #9400d3;
---grape: #6f2da8;
-
-};
-
-
-
+    --primary-light: #0f3460;
+    --primary-dark: #16213e;
+    --primary-contrast-light: white;
+}
