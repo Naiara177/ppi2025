@@ -4,6 +4,7 @@
     background-color: rgb(243, 229, 229); /* Área branca complementar */
 }
 
+/* Container principal */
 .container {
     display: flex;
     flex-direction: column;
@@ -13,8 +14,9 @@
     padding: 4rem;
     border-radius: 20px;
     box-shadow: 0px 4px 10px rgba(7, 7, 197, 0.5);
-
-    /* Container principal *
+    width: 100%;
+    max-width: 1200px; /* Defini um tamanho máximo para evitar esticamento excessivo */
+    margin: auto;
 }
 
 /* Rodapé fixo no topo */
@@ -22,7 +24,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 200%;
+  width: 100%; /* Antes estava em 200%, agora está correto */
   background-color: white;
   color: #333;
   text-align: center;
@@ -31,30 +33,42 @@
   justify-content: space-between;
   align-items: center;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
+  z-index: 1000;
 }
 
 .header1 h1 {
     font-size: 3.5em;
     margin-bottom: 35px;
+    text-align: center;
 }
 
+/* Grid de imagens */
 .grid {
     display: grid;
     gap: 2rem;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     padding: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
 }
 
+/* Cartões estilizados */
 .card {
     background-color: #ab82d7;
-    padding: 1rem;
+    padding: 1.5rem; /* Aumentei um pouco o espaçamento */
     border-radius: 12px;
     box-shadow: 0px 4px 8px rgba(166, 144, 184, 0.5);
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(166, 144, 184, 0.7);
+}
+
+/* Imagens dentro dos cartões */
 .cardImage {
     width: 100%;
     height: 200px;
@@ -62,7 +76,7 @@
     border-radius: 8px;
 }
 
-
+/* Rodapé */
 .footer {
     background-color: white; /* Fundo branco */
     color: #bf8ec9; /* Cor escura para o texto ficar visível */
@@ -70,6 +84,7 @@
     padding: 20px;
     width: 100%;
     box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para separação */
+    margin-top: 2rem; /* Adicionei espaçamento para evitar que encoste demais no conteúdo */
 }
 
 .footerSpace {
