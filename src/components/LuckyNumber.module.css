@@ -1,0 +1,55 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--primary-contrast-light);
+  padding: 20px;
+}
+
+.numberDisplay {
+  font-size: 4rem;
+  padding: 20px;
+  background-color: #df76ef; /* Fundo verde */
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  width: 300px;
+}
+
+.button {
+  font-size: 2rem;
+  padding: 15px 30px;
+  border-radius: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.history {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.history h2 {
+  font-size: 1.5rem;
+}
+
+.history ul {
+  list-style: none;
+  padding: 0;
+}
+
+.history li {
+  font-size: 1.2rem;
+  padding: 5px;
+}

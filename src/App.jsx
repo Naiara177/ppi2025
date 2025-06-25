@@ -1,14 +1,13 @@
 import "./styles/theme.css";
 import "./styles/global.css";
 import { MyGrid } from "./components/MyGrid";
+import { LuckyNumber } from "./components/LuckyNumber"; // Corrigido o nome do componente
 
 export default function App() {
-  
   return (
-    //React Fragment
     <>
-      <MyGrid />
-   
+    
+      <LuckyNumber /> {/* Corrigido o nome do componente */}
     </>
   );
 }
