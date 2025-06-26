@@ -19,14 +19,26 @@ export function LuckyNumber() {
         console.log("Lucky Number is now: " + randomNumber);
     };
 
+    const resetGame = () => {
+        setLuckyNumber(0); // Reseta o número sorteado
+        setHistory([]); // Limpa o histórico
+    };
+
     return (
         <div className={styles.container}>
             <h1 className={styles.numberDisplay}>
                 {luckyNumber === 0 ? "🎲 Contador" : `Contador = ${luckyNumber}`}
             </h1>
-            <button className={styles.button} onClick={generateUniqueNumber}>
-               Clique 
-            </button>
+
+            {/* Botões agrupados */}
+            <div className={styles.buttonGroup}>
+                <button className={styles.button} onClick={generateUniqueNumber}>
+                   Clique 
+                </button>
+                <button className={styles.button} onClick={resetGame}>
+                   Reset 🔄
+                </button>
+            </div>
 
             {/* Exibe o histórico de números sorteados */}
             <div className={styles.history}>

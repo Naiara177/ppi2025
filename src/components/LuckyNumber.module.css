@@ -56,3 +56,8 @@
   padding: 4px;
   color:rgb(134, 119, 7)
 }
+.buttonGroup {
+    display: flex; /* Organiza os botões em linha */
+    gap: 1rem; /* Espaçamento entre os botões */
+    justify-content: center; /* Centraliza os botões */
+}
