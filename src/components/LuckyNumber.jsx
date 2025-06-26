@@ -10,12 +10,12 @@ export function LuckyNumber() {
         do {
             randomNumber = Math.floor(Math.random() * 100) + 1; // Sorteia um número entre 1 e 100
             if (history.includes(randomNumber)) {
-                alert("Número repetido! Sorteando novamente...");
+                alert("Eitaa Número repetido! Sorteando novamente...");
             }
         } while (history.includes(randomNumber)); // Continua sorteando até achar um número único
 
         setLuckyNumber(randomNumber);
-        setHistory([...history, randomNumber]); // Adiciona ao histórico
+        setHistory([...history, randomNumber]); 
         console.log("Lucky Number is now: " + randomNumber);
     };
 
