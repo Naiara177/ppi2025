@@ -1,7 +1,21 @@
+/* src/components/ProductList.module.css */
+/* src/components/ProductList.module.css */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  justify-content: flex-start;
   gap: 2rem;
+  padding: 2rem;
+  text-align: center;
+  min-height: 100vh;       
+
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
 }
