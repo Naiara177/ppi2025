@@ -1,21 +1,89 @@
-/* src/components/ProductList.module.css */
-/* src/components/ProductList.module.css */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 2rem;
-  padding: 2rem;
-  text-align: center;
-  min-height: 100vh;       
-
+.cartButton {
+  margin-bottom: 2rem;
+  padding: 0.7rem 1.5rem;
+  font-size: 1rem;
+  background: linear-gradient(to right, #8446ff, #6b34db);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-@media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-  }
+.cartSummary {
+  background-color: #fdfcfe;
+  padding: 2rem;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.pricingDetails {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.pricingDetails p {
+  margin: 0.5rem 0;
+}
+
+.actions {
+  margin-top: 1.5rem;
+}
+
+.actions button {
+  padding: 0.6rem 1.2rem;
+  margin-right: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.actions button:first-child {
+  background-color: #cccccc;
+}
+
+.actions button:last-child {
+  background-color: #00aa55;
+  color: white;
+}
+
+.confirmation {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #3a006e;
+}
+
+.removeButton {
+  margin-left: 1rem;
+  padding: 0.4rem 0.8rem;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.addToCartButton {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #944aff, #6b34db);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(132, 70, 255, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.addToCartButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(132, 70, 255, 0.4);
 }

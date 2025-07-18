@@ -14,15 +14,15 @@ export function ProductList() {
   const [error, setError] = useState(null);
   const [cartItems, setCartItems] = useState([]);
   const [purchaseCompleted, setPurchaseCompleted] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
+  const [warranty, setWarranty] = useState("none");
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        setProducts(
-          data.products.sort((a, b) => a.title.localeCompare(b.title))
-        );
+        setProducts(data.products.sort((a, b) => a.title.localeCompare(b.title)));
       } catch (error) {
         setError(error);
       } finally {
@@ -37,84 +37,84 @@ export function ProductList() {
     const item = products.find((p) => p.id === id);
     setCartItems((prev) => [...prev, item]);
     setPurchaseCompleted(false);
-    console.log(`Adicionado: ${item.title}`);
   }
 
-  function handleRemoveLastItem() {
-    if (cartItems.length === 0) return;
-    const removed = cartItems[cartItems.length - 1];
-    setCartItems((prev) => prev.slice(0, -1));
+  function handleRemoveItem(id) {
+    const index = cartItems.findIndex((item) => item.id === id);
+    if (index === -1) return;
+    const updated = [...cartItems];
+    updated.splice(index, 1);
+    setCartItems(updated);
     setPurchaseCompleted(false);
-    console.log(`Removido: ${removed.title}`);
-  }
-
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function handleFinishPurchase() {
     if (cartItems.length === 0) return;
     setPurchaseCompleted(true);
-    console.log("Compra finalizada!");
+    setShowSummary(false);
   }
 
   const total = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const pixTotal = total * 0.9;
+  const parcelado = total / 10;
+  const garantia =
+    warranty === "12m" ? total * 0.03 :
+    warranty === "24m" ? total * 0.05 :
+    0;
+  const totalFinal = total + garantia;
 
   return (
     <div className={styles.container}>
-      <h2>🛍️ Itens no carrinho: {cartItems.length}</h2>
-      <p>💰 Sua compra deu o total de: <strong>R$ {total.toFixed(2)}</strong></p>
+      <button onClick={() => setShowSummary(true)} className={styles.cartButton}>
+        🛒 Abrir seu carrinho
+      </button>
 
-      <div style={{ marginBottom: "1rem" }}>
-        <button
-          onClick={handleRemoveLastItem}
-          style={{
-            marginRight: "1rem",
-            padding: "0.75rem 1.5rem",
-            fontSize: "1rem",
-            borderRadius: "6px",
-            backgroundColor: "#cc4444",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer"
-          }}
-        >
-          Remover último item❌
-        </button>
+      {showSummary && (
+        <div className={styles.cartSummary}>
+          <h2>Resumo da sua compra</h2>
 
-       
-
-        <button
-          onClick={handleFinishPurchase}
-          style={{
-            padding: "0.75rem 1.5rem",
-            fontSize: "1rem",
-            borderRadius: "6px",
-            backgroundColor: "#00aa55",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer"
-          }}
-        >
-          Finalizar sua compra✅
-        </button>
-      </div>
-
-      {cartItems.length > 0 && (
-        <div style={{ width: "100%", maxWidth: "600px", marginBottom: "2rem" }}>
-          <h3>🧾 Produtos adicionados:</h3>
           <ul>
             {cartItems.map((item, index) => (
               <li key={index}>
                 {item.title} — R$ {item.price.toFixed(2)}
+                <button
+                  className={styles.removeButton}
+                  onClick={() => handleRemoveItem(item.id)}
+                >
+                  ❌ Remover
+                </button>
               </li>
             ))}
           </ul>
+
+          <div className={styles.pricingDetails}>
+            <p><strong>Total dos produtos:</strong> R$ {total.toFixed(2)}</p>
+            <p><strong>Valor com PIX:</strong> R$ {pixTotal.toFixed(2)} <span style={{ color: "#00aa55" }}>(-10%)</span></p>
+            <p><strong>Parcelado:</strong> 10x de R$ {parcelado.toFixed(2)} sem juros</p>
+
+            <label htmlFor="warranty">Garantia estendida:</label>
+            <select
+              id="warranty"
+              value={warranty}
+              onChange={(e) => setWarranty(e.target.value)}
+            >
+              <option value="none">Sem garantia</option>
+              <option value="12m">12 meses — R$ {(total * 0.03).toFixed(2)}</option>
+              <option value="24m">24 meses — R$ {(total * 0.05).toFixed(2)}</option>
+            </select>
+
+            <p><strong>Total com garantia:</strong> R$ {totalFinal.toFixed(2)}</p>
+          </div>
+
+          <div className={styles.actions}>
+            <button onClick={() => setShowSummary(false)}>🔙 Voltar</button>
+            <button onClick={handleFinishPurchase}>✅ Finalizar compra</button>
+          </div>
         </div>
       )}
 
       {purchaseCompleted && (
-        <div style={{ marginTop: "2rem", fontSize: "1.2rem", color: "#3a006e" }}>
+        <div className={styles.confirmation}>
           <strong>🎉 Compra realizada com sucesso!</strong>
           <p>💜 A equipe da <strong>TJA Megastore</strong> agradece sua preferência!</p>
         </div>
@@ -127,19 +127,17 @@ export function ProductList() {
             style={{ margin: "2rem auto", display: "block" }}
             sx={{ color: "#63108dff" }}
           />
-          <p>Loading products...</p>
+          <p>Carregando produtos...</p>
         </div>
       )}
 
-      {error && <p>Error loading products: {error.message} ❌</p>}
+      {error && <p>Erro ao carregar: {error.message}</p>}
 
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          {...product}
-          onAddToCart={handleAddToCart}
-        />
-      ))}
+      <div className={styles.productGrid}>
+        {products.map((product) => (
+          <Product key={product.id} {...product} onAddToCart={handleAddToCart} />
+        ))}
+      </div>
     </div>
   );
 }

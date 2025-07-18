@@ -1,4 +1,3 @@
-// src/App.jsx
 import { ProductList } from "./components/ProductList";
 
 export default function App() {
@@ -8,12 +7,12 @@ export default function App() {
     
       <div
         style={{
-          background: "linear-gradient(to right, #d8b5f6, #bb8ce5)",
+          background: "linear-gradient(to right, #4a2867ff, #bb8ce5)",
           padding: "2rem 0",
           textAlign: "center",
           borderBottom: "4px solid rgb(147, 96, 205)",
           fontFamily: "'Segoe UI', sans-serif",
-          color: "#3a006e",
+          color: "#361b4dff",
         }}
       >
         <h1 style={{ fontSize: "2.4rem", margin: 0 }}>TJA Megastore</h1>
