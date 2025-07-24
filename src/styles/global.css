@@ -1,6 +1,6 @@
 body {
-    background-color: #1a1a2e;
-    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #f3e6ff, #e9d6fa 60%, #f3e6ff);
+    min-height: 100vh;
     margin: 0;
-    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
 }
