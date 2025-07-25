@@ -1,14 +1,12 @@
-import React from "react";
-import styles from "./Product.module.css";
-
-export function Product({ image, title, description, price, onAddToCart }) {
+export function Product({ product, addToCart }) {
   return (
-    <div className={styles.productCard}>
-      <img src={image} alt={title} className={styles.productImage} />
-      <h3 className={styles.productTitle}>{title}</h3>
-      <p className={styles.productDescription}>{description}</p>
-      <p className={styles.productPrice}>R$ {price.toFixed(2)}</p>
-      <button className={styles.addToCartButton} onClick={onAddToCart}>
+    <div style={{ border: "1px solid #ccc", padding: "1rem", width: "250px", textAlign: "center" }}>
+      <img src={product.thumbnail} alt={product.title} style={{ width: "100%", height: "150px", objectFit: "cover" }} />
+      <h3>{product.title}</h3>
+      <p>{product.description.slice(0, 50)}...</p>
+      <strong>R$ {product.price}</strong>
+      <br />
+      <button onClick={() => addToCart(product)} style={{ marginTop: "0.5rem" }}>
         Adicionar ao carrinho
       </button>
     </div>

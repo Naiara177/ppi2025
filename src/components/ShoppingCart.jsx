@@ -1,29 +1,30 @@
-import styles from "./styles/Cart.module.css";
-
 export function Cart({ cart, updateQuantity, clearCart }) {
-  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className={styles.cart}>
-      <h1>Seu Carrinho</h1>
-      <ul>
-        {cart.map(item => (
-          <li key={item.id} className={styles.item}>
-            <img src={item.thumbnail} alt={item.title} />
-            <div>
-              <h3>{item.title}</h3>
-              <p>R$ {item.price}</p>
-              <div className={styles.controls}>
-                <button onClick={() => updateQuantity(item.id, -1)}>-</button>
-                <span>{item.quantity}</span>
-                <button onClick={() => updateQuantity(item.id, 1)}>+</button>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <p className={styles.total}>Total: R$ {total.toFixed(2)}</p>
-      <button className={styles.clear} onClick={clearCart}>🗑️ Limpar Carrinho</button>
+    <div style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
+      <h2>Carrinho de Compras 🛒</h2>
+      {cart.length === 0 ? (
+        <p>Seu carrinho está vazio.</p>
+      ) : (
+        <>
+          <ul style={{ listStyle: "none", padding: 0 }}>
+            {cart.map((item) => (
+              <li key={item.id} style={{ marginBottom: "1rem", borderBottom: "1px solid #ddd", paddingBottom: "0.5rem" }}>
+                <strong>{item.title}</strong> — R$ {item.price.toFixed(2)} x {item.quantity}
+                <div style={{ marginTop: "0.5rem" }}>
+                  <button onClick={() => updateQuantity(item.id, -1)}>-</button>
+                  <button onClick={() => updateQuantity(item.id, 1)}>+</button>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p><strong>Total:</strong> R$ {total.toFixed(2)}</p>
+          <button onClick={clearCart} style={{ marginTop: "1rem", backgroundColor: "#d9534f", color: "#fff", border: "none", padding: "0.5rem 1rem" }}>
+            Remover tudo
+          </button>
+        </>
+      )}
     </div>
   );
 }

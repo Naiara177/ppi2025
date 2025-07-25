@@ -1,55 +1,33 @@
-import React, { useState, useEffect } from "react";
-import styles from "./ProductList.module.css";
+import { useEffect, useState } from "react";
 import { Product } from "./Product";
+import CircularProgress from "@mui/material/CircularProgress";
+import styles from "../styles/ProductList.module.css";
 
 export function ProductList({ addToCart }) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const category = "smartphones";
+  const limit = 10;
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await fetch("https://dummyjson.com/products");
-        const data = await response.json();
-        setProducts(data.products);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
+    fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data.products))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) {
-    return (
-      <div className={styles.container}>
-        <p>Carregando produtos...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={styles.container}>
-        <p>Erro ao carregar produtos: {error.message}</p>
-      </div>
-    );
-  }
+  if (loading) return <CircularProgress style={{ display: "block", margin: "2rem auto" }} />;
+  if (error) return <p>Erro ao carregar produtos: {error.message}</p>;
 
   return (
-    <div className={styles.productGrid}>
-      {products.map((product) => (
-        <Product
-          key={product.id}
-          image={product.thumbnail}
-          title={product.title}
-          description={product.description}
-          price={product.price}
-          onAddToCart={() => addToCart(product)}
-        />
-      ))}
+    <div className={styles.container}>
+      <div className={styles.productList}>
+        {products.map((product) => (
+          <Product key={product.id} product={product} addToCart={addToCart} />
+        ))}
+      </div>
     </div>
   );
 }
