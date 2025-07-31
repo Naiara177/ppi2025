@@ -1,5 +1,11 @@
-:root {
-    --primary-light: #b385df;
-    --primary-dark: #330b68;
-    --primary-contrast-light: white;
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background-color: #f9f9f9;
+}
+
+button {
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: 0 0.2rem;
 }
