@@ -3,26 +3,34 @@
   align-items: center;
   justify-content: space-between;
   gap: 3rem;
+  height: 15rem;
   padding: 5rem;
-  background-color: var(--primary-dark);
+  background-color: var(--primary);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
+
 .container h1 {
-    font-size: 10rem;
-    font-weight: bolder;
   font-size: 5rem;
   font-weight: bolder;
+  color: rgb(197, 197, 89);
 }
+
 .containerImg img {
   height: auto;
   width: 100%;
   max-width: 20rem;
 }
 
-.containerImg img{
-    height: auto;
-    width: 100%;
-    max-width: 20rem;
+.container p {
+  font-size: 1.5rem;
+  color: rgb(236, 236, 138);
 }
+
 .cartInfo {
   border-radius: 3rem;
   background-color: var(--primary-light);
@@ -31,4 +39,46 @@
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--primary);
+}
+
+.cartIcon {
+  position: relative;
+  display: inline-block;
+  color: rgb(236, 236, 138);
+}
+
+.cartCount {
+  position: absolute;
+  top: -0.8rem;
+  right: -2rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--primary-dark);
+  color: var(--gray-100);
+  padding: 0.2rem 0.6rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.authLink {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: rgb(236, 236, 138);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.authLink:hover {
+  color: yellow;
 }
