@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import styles from "./Adm.module.css";
-import { CartContext } from "../service/CartContext";
+import { CartContext } from "../context/CartContext";
 
 export function Adm() {
   const { products } = useContext(CartContext);

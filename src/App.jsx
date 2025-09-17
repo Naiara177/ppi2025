@@ -4,7 +4,7 @@ import  "./components/ProductList";
 import "./components/MyHeader";
 import "react-router";
 import "./components/Cart";
-import  "./service/CartContext";
+import  "./context/CartContext";
 import  "./components/Login";
 import "./components/Cadastrar";
 import "./components/Adm";
