@@ -2,53 +2,52 @@ import { useState } from "react";
 import styles from "./LuckyNumber.module.css";
 
 export function LuckyNumber() {
-    const [luckyNumber, setLuckyNumber] = useState(0);
-    const [history, setHistory] = useState([]); // Armazena os números sorteados
+  //REACT HOOK - useState()
+  const [luckyNumber, setLuckyNumber] = useState(0);
+  const [array, setArray] = useState([]);
+  const [message, setMessage] = useState("");
 
-    const generateUniqueNumber = () => {
-        let randomNumber;
-        do {
-            randomNumber = Math.floor(Math.random() * 100) + 1; // Sorteia um número entre 1 e 100
-            if (history.includes(randomNumber)) {
-                alert("Eitaa Número repetido! Sorteando novamente...");
-            }
-        } while (history.includes(randomNumber)); // Continua sorteando até achar um número único
+  function handleClick() {
+    var n = Math.ceil(Math.random() * 31);
+    setLuckyNumber(n);
 
-        setLuckyNumber(randomNumber);
-        setHistory([...history, randomNumber]); 
-        console.log("Lucky Number is now: " + randomNumber);
-    };
+    if (array.includes(n)) {
+      setMessage(`The number ${n} is already picked!`);
+    } else {
+      setMessage("");
+      setArray([...array, n]);
+    }
+  }
 
-    const resetGame = () => {
-        setLuckyNumber(0); // Reseta o número sorteado
-        setHistory([]); // Limpa o histórico
-    };
-
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.numberDisplay}>
-                {luckyNumber === 0 ? "🎲 Contador" : `Contador = ${luckyNumber}`}
-            </h1>
-
-            {/* Botões agrupados */}
-            <div className={styles.buttonGroup}>
-                <button className={styles.button} onClick={generateUniqueNumber}>
-                   Clique 
-                </button>
-                <button className={styles.button} onClick={resetGame}>
-                   Reset 🔄
-                </button>
-            </div>
-
-            {/* Exibe o histórico de números sorteados */}
-            <div className={styles.history}>
-                <h2>Histórico de Números Sorteados:</h2>
-                <ul>
-                    {history.map((num, index) => (
-                        <li key={index}>{num}</li>
-                    ))}
-                </ul>
-            </div>
+  return (
+    <div className={styles.container}>
+      {luckyNumber ? (
+        <h1>Lucky Number = {luckyNumber}</h1>
+      ) : (
+        <h1>Lucky Number 🎲</h1>
+      )}
+      <div className={styles.buttons}>
+        <button className={styles.button} onClick={handleClick}>
+          I'm feeling lucky today!
+        </button>
+        <button
+          className={styles.button}
+          onClick={() => {
+            setLuckyNumber(0);
+            setArray([]);
+            setMessage("");
+          }}
+        >
+          RESET 🔄
+        </button>
+      </div>
+      {message && <p>{message}</p>}
+      {array.length > 0 && (
+        <div>
+          <h3>Lucky Numbers Array:</h3>
+          <p>[{array.toString()}]</p>
         </div>
-    );
+      )}
+    </div>
+  );
 }

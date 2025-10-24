@@ -1,36 +1,68 @@
-import { useEffect, useState } from "react";
+import styles from "./ProductList.module.css";
+import { CircularProgress } from "@mui/material";
 import { Product } from "./Product";
-import CircularProgress from "@mui/material/CircularProgress";
-import styles from "../styles/ProductList.module.css";
+import { useState, useContext, useEffect, useRef } from "react";
+import { CartContext } from "../context/CartContext";
 
-export function ProductList({ addToCart }) {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const category = "smartphones";
-  const limit = 10;
+export function ProductList() {
+  
+  const { products, loading, error } = useContext(CartContext);
+
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const searchInput = useRef(null);
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}`)
-      .then((res) => res.json())
-      .then((data) => setProducts(data.products))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, []);
+    if(products) {
+      setFilteredProducts(products);
+    }
+  }, [products]);
 
-  if (loading)
-    return <CircularProgress style={{ display: "block", margin: "2rem auto" }} />;
-  if (error)
-    return <p>Erro ao carregar produtos: {error.message}</p>;
+  function handleSearch() {
+    const query = searchInput.current.value.toLowerCase();
+    setFilteredProducts(
+      products.filter((product) =>
+        product.title.toLowerCase().includes(query) || 
+        product.description.toLowerCase().includes(query)
+      )
+    );
+  }
+
+  function handleClear() {
+    searchInput.current.value = "";
+    setFilteredProducts(products);
+  }
 
   return (
     <div className={styles.container}>
+      <div className={styles.searchContainer}>
+        <input
+          ref={searchInput}
+          type="text"
+          placeholder="Search products..."
+          className={styles.searchInput}
+          onChange={handleSearch}
+        />
+        <button className={styles.searchButton} onClick={handleClear}>
+          CLEAR
+        </button>
+      </div>
       <div className={styles.productList}>
-        {products.map((product) => (
-          <Product key={product.id} product={product} addToCart={addToCart} />
+        {filteredProducts.map((product) => (
+          <Product key={product.id} product={product} />
         ))}
       </div>
+      {loading && (
+        <div>
+          <CircularProgress
+            thickness={5}
+            style={{ margin: "2rem auto", display: "block" }}
+            sx={{ color: "#001111" }}
+          />
+          <p>Loading products...</p>
+        </div>
+      )}
+      {error && <p>❌ {error}</p>}
     </div>
   );
 }
-                                                                                                  

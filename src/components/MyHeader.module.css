@@ -17,7 +17,26 @@
 .container h1 {
   font-size: 5rem;
   font-weight: bolder;
-  color: rgb(197, 197, 89);
+  color: var(--background);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  gap: 2rem;
+}
+
+.link {
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--primary);
+  color: var(--text);
+  transition: color 0.3s;
+}
+
+.link:hover {
+  color: var(--primary-dark);
 }
 
 .containerImg img {
@@ -28,7 +47,6 @@
 
 .container p {
   font-size: 1.5rem;
-  color: rgb(236, 236, 138);
 }
 
 .cartInfo {
@@ -41,15 +59,9 @@
   text-align: center;
 }
 
-.link {
-  text-decoration: none;
-  color: var(--primary);
-}
-
 .cartIcon {
   position: relative;
   display: inline-block;
-  color: rgb(236, 236, 138);
 }
 
 .cartCount {
@@ -65,20 +77,13 @@
   z-index: 1;
 }
 
-.headerRight {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-
-.authLink {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: rgb(236, 236, 138);
+.welcomeMessage {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-right: 1rem;
   text-decoration: none;
-  transition: color 0.2s ease;
 }
 
-.authLink:hover {
-  color: yellow;
+.welcomeMessage:hover {
+  text-decoration: underline;
 }

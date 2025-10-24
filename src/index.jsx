@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom'; // <-- necessário importar
+import { BrowserRouter } from 'react-router-dom'; // Certo!
 
 import App from './App';
 

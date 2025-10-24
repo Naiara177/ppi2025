@@ -1,14 +1,31 @@
-export function Product({ product, addToCart }) {
+import styles from "./Product.module.css";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router";
+
+export function Product({ product }) {
+  const { addToCart } = useContext(CartContext);
+
   return (
-    <div style={{ border: "1px solid #ccc", padding: "1rem", width: "250px", textAlign: "center" }}>
-      <img src={product.thumbnail} alt={product.title} style={{ width: "100%", height: "150px", objectFit: "cover" }} />
-      <h3>{product.title}</h3>
-      <p>{product.description.slice(0, 50)}...</p>
-      <strong>R$ {product.price}</strong>
-      <br />
-      <button onClick={() => addToCart(product)} style={{ marginTop: "0.5rem" }}>
-        Adicionar ao carrinho
+    <div key={product.id} className={styles.productCard}>
+      <img
+        src={product.thumbnail}
+        alt={product.title}
+        className={styles.productImage}
+      />
+      <h2 className={styles.productTitle}>{product.title}</h2>
+      <p className={styles.productDescription}>{product.description}</p>
+      <p className={styles.productPrice}>${product.price}</p>
+      {/* <Link to="/cart"> */}
+      <button
+        onClick={() => {
+          addToCart(product);
+        }}
+        className={styles.productButton}
+      >
+        ADD TO CART
       </button>
+      {/* </Link> */}
     </div>
   );
 }

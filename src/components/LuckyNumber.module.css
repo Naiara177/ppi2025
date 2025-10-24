@@ -1,63 +1,33 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(  --primary-light);
-  padding: 20px;
-}
-
-.numberDisplay {
-  font-size: 4rem;
-  padding: 20px;
-  background-color: #612e69; 
-  border-radius: 10px;
-  color:rgb(187, 167, 10);
-  text-align: center;
-  width: 300px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 2rem;
+    height: 100vh;
+    background-color: var(--primary);
+    font-size: 3rem;
 }
 
 .button {
-  font-size: 2rem;
-  padding: 15px 30px;
-  border-radius: 10px;
-  background-color: #7f18a1;
-  color: rgb(202, 202, 51);
-  border: none;
-  cursor: pointer;
+    background-color: var(--primary-contrast-light);
+    color: var(--primary-dark);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: bolder;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
-  background-color: #b373c4;
+    background-color: var(--primary-light);
+    transform: scale(1.05);
 }
 
-.history {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #32064a;
-  border-radius: 10px;
-  width: 300px;
-  text-align: center;
-}
-
-.history h2 {
-  font-size: 1.6rem;
-  color:rgb(184, 179, 52)
-}
-
-.history ul {
-  list-style: none;
-  padding: 0;
-
-}
-
-.history li {
-  font-size: 2.2rem;
-  padding: 4px;
-  color:rgb(134, 119, 7)
-}
-.buttonGroup {
-    display: flex; /* Organiza os botões em linha */
-    gap: 1rem; /* Espaçamento entre os botões */
-    justify-content: center; /* Centraliza os botões */
+.buttons {
+    display: flex;
+    gap: 1rem;
 }

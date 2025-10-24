@@ -1,94 +1,65 @@
-.footerSpace {
-    height: 50px; /* Ajuste a altura da área de separação */
-    width: 100%;
-    background-color: rgb(243, 229, 229); /* Área branca complementar */
-}
-
-/* Container principal */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #794da8;
-    color: white;
-    padding: 4rem;
-    border-radius: 20px;
-    box-shadow: 0px 4px 10px rgba(7, 7, 197, 0.5);
-    width: 100%;
-    max-width: 1200px; /* Defini um tamanho máximo para evitar esticamento excessivo */
-    margin: auto;
-}
-
-/* Rodapé fixo no topo */
-.topFooter {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%; /* Antes estava em 200%, agora está correto */
-  background-color: white;
-  color: #333;
-  text-align: center;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
-
-.header1 h1 {
-    font-size: 3.5em;
-    margin-bottom: 35px;
-    text-align: center;
-}
-
-/* Grid de imagens */
 .grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    padding: 2rem;
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
+  padding: 3rem;
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-template-rows: repeat(auto-fit, min-content);
 }
 
-/* Cartões estilizados */
 .card {
-    background-color: #ab82d7;
-    padding: 1.5rem; /* Aumentei um pouco o espaçamento */
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(166, 144, 184, 0.5);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 20rem;
+  background-color: var(--primary-dark);
+  color: var(--primary-contrast-light);
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.5);
+  font-size: 3rem;
+  text-align: center;
 }
 
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 6px 12px rgba(166, 144, 184, 0.7);
+.container {
+  display: grid;
+
+  grid-template-areas:
+    "header1 header1"
+    "aside header2"
+    "aside main"
+    "footer footer";
+
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 10rem 5rem auto 10rem;
+
+  @media (max-width: 1200px) {
+    grid-template-areas:
+      "header1"
+      "header2"
+      "main"
+      "footer";
+
+    grid-template-columns: 1fr;
+  }
 }
 
-/* Imagens dentro dos cartões */
-.cardImage {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
+.header1 {
+  grid-area: header1;
+  background-color: darkslateblue;
 }
 
-/* Rodapé */
+.header2 {
+  grid-area: header2;
+  background-color: deepskyblue;
+}
+
+.aside {
+  grid-area: aside;
+  background-color: deeppink;
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
+}
+
 .footer {
-    background-color: white; /* Fundo branco */
-    color: #bf8ec9; /* Cor escura para o texto ficar visível */
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para separação */
-    margin-top: 2rem; /* Adicionei espaçamento para evitar que encoste demais no conteúdo */
-}
-
-.footerSpace {
-    height: 50px; /* Ajuste a altura da área de separação */
-    width: 100%;
-    background-color: white; /* Área branca complementar */
+  grid-area: footer;
+  background-color: darkslateblue;
 }
