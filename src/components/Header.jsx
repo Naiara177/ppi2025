@@ -1,27 +1,63 @@
-import React from 'react';
-import '../styles/header.css';
+import styles from "./Header.module.css";
+import { ShoppingBasket } from "lucide-react";
+import { Link } from "react-router";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import { SessionContext } from "../context/SessionContext";
+import { ThemeToggle } from "./ThemeToggle";
 
-export default function Header({ cartCount, onCartClick, onShopClick }) {
+export function Header() {
+  const { cart } = useContext(CartContext);
+  const { session } = useContext(SessionContext);
+
   return (
-    <header className="header">
-      <div className="container header-inner">
-        <button className="logo" onClick={onShopClick}>TJA Megastore</button>
-        <div className="search-box">
-          <input type="search" placeholder="Search products..." />
-          <button className="btn-clear">CLEAR</button>
-        </div>
-        <div className="header-links">
-          <button>Sign In</button>
-          <button>Register</button>
-          <button className="theme-toggle">🌙</button>
-          <div style={{ position: 'relative' }}>
-            <button onClick={onCartClick} style={{ fontSize: '18px' }}>
-              🛒
-              {cartCount > 0 && <span className="badge">{cartCount}</span>}
-            </button>
-          </div>
-        </div>
+    <div className={styles.container}>
+      <div>
+        <Link to="/" className={styles.link}>
+          <h1>TJA Megastore</h1>
+        </Link>
+        {session && (
+          <Link to="/user" className={styles.welcomeMessage}>
+             Welcome, {session.user.user_metadata.username} {session.user.user_metadata.admin && '⭐'}
+          </Link>
+        )}
       </div>
-    </header>
+
+      <div className={styles.actions}>
+        {!session && (
+          <>
+            <Link to="/signin" className={styles.link}>
+              Sign In
+            </Link>
+            <Link to="/register" className={styles.link}>
+              Register
+            </Link>
+          </>
+        )}
+        <ThemeToggle />
+        <Link to="/cart" className={styles.link}>
+          <div className={styles.cartInfo}>
+            <div className={styles.cartIcon}>
+              <ShoppingBasket size={32} />
+              {cart.length > 0 && (
+                <span className={styles.cartCount}>
+                  {cart.reduce((total, item) => total + item.quantity, 0)}
+                </span>
+              )}
+            </div>
+
+            <p>
+              Total: ${" "}
+              {cart
+                .reduce(
+                  (total, product) => total + product.price * product.quantity,
+                  0
+                )
+                .toFixed(2)}
+            </p>
+          </div>
+        </Link>
+      </div>
+    </div>
   );
 }

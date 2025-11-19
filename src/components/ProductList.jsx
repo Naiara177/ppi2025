@@ -1,61 +1,68 @@
 import styles from "./ProductList.module.css";
-import { useCart } from "../context/CartContext";
+import { CircularProgress } from "@mui/material";
+import { Product } from "./Product";
+import { useState, useContext, useEffect, useRef } from "react";
+import { CartContext } from "../context/CartContext";
 
-export default function ProductList() {
-  const { addToCart } = useCart();
+export function ProductList() {
+  
+  const { products, loading, error } = useContext(CartContext);
 
-  const products = [
-    {
-      id: 1,
-      name: "iPhone 5s",
-      price: 199.99,
-      desc: "The iPhone 5s is a classic smartphone known for its compact design.",
-      image: "https://i.imgur.com/5f1y3YQ.png"
-    },
-    {
-      id: 2,
-      name: "iPhone 6",
-      price: 299.99,
-      desc: "Stylish and capable smartphone with a larger display.",
-      image: "https://i.imgur.com/9BtjKzG.png"
-    },
-    {
-      id: 3,
-      name: "iPhone 13 Pro",
-      price: 1099.99,
-      desc: "Cutting-edge smartphone with a powerful camera system.",
-      image: "https://i.imgur.com/EN14K9A.png"
-    },
-    {
-      id: 4,
-      name: "iPhone X",
-      price: 899.99,
-      desc: "Flagship device featuring OLED display and Face ID.",
-      image: "https://i.imgur.com/UU5mG3F.png"
-    },
-    {
-      id: 5,
-      name: "Oppo A57",
-      price: 249.99,
-      desc: "Mid-range smartphone known for sleek design and good performance.",
-      image: "https://i.imgur.com/SVIe0Pn.png"
+  const [filteredProducts, setFilteredProducts] = useState([]);
+
+  const searchInput = useRef(null);
+
+  useEffect(() => {
+    if(products) {
+      setFilteredProducts(products);
     }
-  ];
+  }, [products]);
+
+  function handleSearch() {
+    const query = searchInput.current.value.toLowerCase();
+    setFilteredProducts(
+      products.filter((product) =>
+        product.title.toLowerCase().includes(query) || 
+        product.description.toLowerCase().includes(query)
+      )
+    );
+  }
+
+  function handleClear() {
+    searchInput.current.value = "";
+    setFilteredProducts(products);
+  }
 
   return (
-    <div className={styles.grid}>
-      {products.map((p) => (
-        <div key={p.id} className={styles.card}>
-          <img src={p.image} alt={p.name} className={styles.image} />
-
-          <h2>{p.name}</h2>
-          <p className={styles.desc}>{p.desc}</p>
-
-          <span className={styles.price}>${p.price}</span>
-
-          <button onClick={() => addToCart(p)}>ADD TO CART</button>
+    <div className={styles.container}>
+      <div className={styles.searchContainer}>
+        <input
+          ref={searchInput}
+          type="text"
+          placeholder="Search products..."
+          className={styles.searchInput}
+          onChange={handleSearch}
+        />
+        <button className={styles.searchButton} onClick={handleClear}>
+          CLEAR
+        </button>
+      </div>
+      <div className={styles.productList}>
+        {filteredProducts.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
+      </div>
+      {loading && (
+        <div>
+          <CircularProgress
+            thickness={5}
+            style={{ margin: "2rem auto", display: "block" }}
+            sx={{ color: "#001111" }}
+          />
+          <p>Loading products...</p>
         </div>
-      ))}
+      )}
+      {error && <p>❌ {error}</p>}
     </div>
   );
 }

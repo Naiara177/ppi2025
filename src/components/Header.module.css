@@ -1,60 +1,89 @@
-.header {
-  width: 100%;
-  height: 90px;
-  background-color: #033b5b;
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
-  color: white;
+  gap: 3rem;
+  height: 15rem;
+  padding: 5rem;  
+  background-color: var(--primary);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-.logo {
-  font-size: 32px;
-  font-weight: 700;
-  color: #ffcc00;
+.container h1 {
+  font-size: 5rem;
+  font-weight: bolder;
+  color: var(--background);
 }
 
-.searchArea {
+.actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-items: center;
+  gap: 2rem;
 }
 
-.searchArea input {
-  width: 350px;
-  height: 40px;
-  border-radius: 8px;
-  border: none;
-  padding: 8px;
-  font-size: 14px;
+.link {
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--primary);
+  color: var(--text);
+  transition: color 0.3s;
 }
 
-.searchArea button {
-  background-color: #ffcc00;
-  color: black;
-  font-weight: 700;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 8px;
-  cursor: pointer;
+.link:hover {
+  color: var(--primary-dark);
 }
 
-.rightArea {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+.containerImg img {
+  height: auto;
+  width: 100%;
+  max-width: 20rem;
 }
 
-.rightArea a {
-  color: #ffcc00;
-  font-weight: 600;
+.container p {
+  font-size: 1.5rem;
+}
+
+.cartInfo {
+  border-radius: 3rem;
+  background-color: var(--primary-light);
+  color: var(--primary-contrast-dark);
+  padding: 2rem;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cartIcon {
+  position: relative;
+  display: inline-block;
+}
+
+.cartCount {
+  position: absolute;
+  top: -0.8rem;
+  right: -2rem;
+  font-size: 1.5rem;
+  border-radius: 1rem;
+  background-color: var(--primary-dark);
+  color: var(--gray-100);
+  padding: 0.2rem 0.6rem;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.welcomeMessage {
+  font-size: 1.5rem;
+  color: var(--text);
+  margin-right: 1rem;
   text-decoration: none;
 }
 
-.yellowBall {
-  width: 60px;
-  height: 60px;
-  background-color: #ffcc00;
-  border-radius: 50%;
+.welcomeMessage:hover {
+  text-decoration: underline;
 }
