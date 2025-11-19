@@ -1,35 +1,364 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using @vitejs/plugin-react"
-    />
-    <link rel="apple-touch-icon" href="/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="/manifest.json" />
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Apple Store - Roxo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 62.5%; }
+    body {
+      font-family: "Lato", sans-serif;
+      background: #0f3a5c;
+      color: #333;
+    }
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
-  <script type="module" src="/src/index.jsx"></script>
+    /* Header */
+    .header {
+      background: #0f3a5c;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 193, 7, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .logo { font-size: 28px; font-weight: 900; color: #ffc107; }
+
+    .search-box {
+      flex: 1;
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .btn-clear {
+      background: #ffc107;
+      color: #1a2f4a;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: "Lato", sans-serif;
+    }
+
+    .header-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .header-links button {
+      background: transparent;
+      border: none;
+      color: #ffc107;
+      cursor: pointer;
+      font-family: "Lato", sans-serif;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .theme-toggle {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #ffc107;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffc107;
+      color: #1a2f4a;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      position: absolute;
+      top: -8px;
+      right: -8px;
+    }
+
+    /* Main */
+    .main { padding: 32px 0; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    h1 { font-size: 24px; margin-bottom: 24px; color: white; text-align: center; }
+
+    /* Products */
+    .search-input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .products-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+    }
+
+    .product-card {
+      flex: 0 0 260px;
+      background: #f5e6c3;
+      padding: 20px;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .product-card:hover { transform: translateY(-4px); }
+
+    .product-image {
+      width: 100%;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 16px;
+      font-size: 80px;
+    }
+
+    .product-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffc107;
+      margin-bottom: 8px;
+    }
+
+    .product-card p {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 16px;
+      line-height: 1.5;
+      min-height: 80px;
+    }
+
+    .price { font-size: 18px; font-weight: 700; color: #ffc107; margin-bottom: 16px; }
+
+    .btn-add-cart {
+      background: #1a2f4a;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    /* Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 1000; align-items: center; justify-content: center; }
+    .modal.active { display: flex; }
+
+    .modal-content {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .modal-price { font-size: 18px; font-weight: 700; color: #ffc107; margin-bottom: 24px; }
+
+    .qty-control { display: flex; gap: 8px; margin-bottom: 24px; }
+    .qty-control button { background: #1a2f4a; color: white; border: none; width: 36px; height: 36px; cursor: pointer; }
+    .qty-control input { width: 60px; text-align: center; }
+
+    /* Cart */
+    .cart-item { background: #f5e6c3; padding: 16px; border-radius: 12px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
+    .cart-summary { background: #f5e6c3; padding: 24px; border-radius: 12px; text-align: right; margin-bottom: 24px; }
+
+    .btn { border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 700; font-family: "Lato", sans-serif; }
+    .btn-primary { background: #1a2f4a; color: white; }
+    .btn-danger { background: #d32f2f; color: white; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">TJA Megastore</div>
+      <div class="search-box">
+        <input type="search" placeholder="Search products...">
+        <button class="btn-clear">CLEAR</button>
+      </div>
+      <div class="header-links">
+        <button>Sign In</button>
+        <button>Register</button>
+        <button class="theme-toggle">🌙</button>
+        <div style="position: relative;">
+          <button onclick="showPage('cart')">🛒<span class="badge" id="badge" style="display:none;">0</span></button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main container">
+    <div id="shop" class="page active">
+      <h1>Produtos em Destaque</h1>
+      <input type="search" placeholder="Pesquisar..." class="search-input">
+      <div class="products-scroll" id="products"></div>
+    </div>
+
+    <div id="cart" class="page">
+      <h1>Carrinho</h1>
+      <div id="cartContent"></div>
+    </div>
+  </main>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="qty-control">
+        <button onclick="decQty()">−</button>
+        <input type="number" id="qty" value="1" min="1">
+        <button onclick="incQty()">+</button>
+      </div>
+      <button class="btn btn-primary" onclick="addCart()">ADD TO CART</button>
+      <button class="btn" onclick="closeModal()" style="background: #ffc107; color: #1a2f4a; margin-left: 8px;">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+      { id: 1, name: 'iPhone 5s', desc: 'The iPhone 5s is a classic smartphone known for its compact design.', price: 199.99 },
+      { id: 2, name: 'iPhone 6', desc: 'The iPhone 6 is a stylish and capable smartphone with a larger display.', price: 299.99 },
+      { id: 3, name: 'iPhone 13 Pro', desc: 'The iPhone 13 Pro is a cutting-edge smartphone with powerful camera.', price: 1099.99 },
+      { id: 4, name: 'iPhone X', desc: 'The iPhone X features a bezel-less OLED display and facial recognition.', price: 899.99 },
+      { id: 5, name: 'Oppo A57', desc: 'The Oppo A57 is a mid-range smartphone for sleek design.', price: 249.99 },
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let selected = null;
+
+    function render() {
+      document.getElementById('products').innerHTML = products.map(p => `
+        <div class="product-card" onclick="openModal(${p.id})">
+          <div class="product-image">📱</div>
+          <h3>${p.name}</h3>
+          <p>${p.desc}</p>
+          <p class="price">$${p.price.toFixed(2)}</p>
+          <button class="btn-add-cart" onclick="event.stopPropagation()">ADD TO CART</button>
+        </div>
+      `).join('');
+      updateBadge();
+    }
+
+    function showPage(page) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(page).classList.add('active');
+      if (page === 'cart') renderCart();
+    }
+
+    function openModal(id) {
+      selected = products.find(p => p.id === id);
+      document.getElementById('modalTitle').textContent = selected.name;
+      document.getElementById('modalDesc').textContent = selected.desc;
+      document.getElementById('modalPrice').textContent = `$${selected.price.toFixed(2)}`;
+      document.getElementById('qty').value = 1;
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    function incQty() {
+      document.getElementById('qty').value = parseInt(document.getElementById('qty').value) + 1;
+    }
+
+    function decQty() {
+      const qty = document.getElementById('qty');
+      qty.value = Math.max(1, parseInt(qty.value) - 1);
+    }
+
+    function addCart() {
+      const qty = parseInt(document.getElementById('qty').value);
+      for (let i = 0; i < qty; i++) {
+        cart.push({ ...selected, cId: Date.now() + Math.random() });
+      }
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateBadge();
+      closeModal();
+    }
+
+    function updateBadge() {
+      const badge = document.getElementById('badge');
+      badge.style.display = cart.length > 0 ? 'flex' : 'none';
+      badge.textContent = cart.length;
+    }
+
+    function renderCart() {
+      if (cart.length === 0) {
+        document.getElementById('cartContent').innerHTML = '<p style="text-align:center; color:#666;">Carrinho vazio</p>';
+        return;
+      }
+      const total = cart.reduce((s, i) => s + i.price, 0);
+      document.getElementById('cartContent').innerHTML = `
+        <div>${cart.map((item, idx) => `
+          <div class="cart-item">
+            <div><h3>${item.name}</h3><p>$${item.price.toFixed(2)}</p></div>
+            <button class="btn btn-danger" onclick="removeCart(${idx})">Remove</button>
+          </div>
+        `).join('')}</div>
+        <div class="cart-summary"><h2>Total: $${total.toFixed(2)}</h2></div>
+        <button class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+      `;
+    }
+
+    function removeCart(idx) {
+      cart.splice(idx, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateBadge();
+      renderCart();
+    }
+
+    function clearCart() {
+      cart = [];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateBadge();
+      renderCart();
+    }
+
+    render();
+  </script>
+</body>
 </html>

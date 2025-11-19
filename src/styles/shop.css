@@ -1,0 +1,50 @@
+h1 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: var(--primary-contrast-dark);
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.products-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  scroll-behavior: smooth;
+}
+
+.products-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.products-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 8px;
+}
+
+.products-scroll::-webkit-scrollbar-thumb {
+  background: var(--accent-yellow);
+  border-radius: 8px;
+}
+
+.products-grid {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
